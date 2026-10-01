@@ -59,9 +59,57 @@ footer{padding:32px 0;border-top:1px solid #222;color:#777;font-size:13px}.foot{
 
 .install-modal{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:20px;z-index:9999}.install-modal.show{display:flex}.install-box{width:min(520px,100%);background:#fff;color:#171717;border-radius:24px;padding:28px;box-shadow:0 30px 90px rgba(0,0,0,.45);position:relative}.install-box h3{font-size:25px;margin:0 0 8px}.install-box>p{color:#666;line-height:1.6;margin:0 0 18px}.install-steps{display:grid;gap:10px;margin:0 0 18px}.install-step{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid #eee;border-radius:14px;background:#fafafa}.step-num{width:27px;height:27px;flex:0 0 27px;border-radius:50%;background:#e50914;color:#fff;display:grid;place-items:center;font-weight:800;font-size:12px}.install-step b{display:block;font-size:13px;margin-bottom:2px}.install-step span{display:block;color:#666;font-size:11px;line-height:1.45}.install-note{font-size:11px;line-height:1.55;color:#666;background:#fff5f5;border-left:3px solid #e50914;padding:10px 12px;border-radius:8px;margin-bottom:18px}.install-actions{display:flex;gap:10px;flex-wrap:wrap}.install-close{position:absolute;right:15px;top:12px;border:0;background:#f2f2f2;width:32px;height:32px;border-radius:50%;font-size:20px;cursor:pointer}.install-actions .btn{border:0;cursor:pointer}.
 </style>
+
+<style id="compact-install-modal">
+#installModal .install-modal,
+#installModal .modal-content,
+#installModal > div {
+  max-width: 420px !important;
+  width: calc(100% - 32px) !important;
+  max-height: 82vh !important;
+  overflow-y: auto !important;
+  padding: 20px !important;
+  border-radius: 18px !important;
+  box-sizing: border-box !important;
+}
+#installModal h2 {font-size:22px!important;margin:0 0 8px!important}
+#installModal p {font-size:13px!important;line-height:1.55!important;margin:6px 0!important}
+#installModal .install-steps,
+#installModal .steps,
+#installModal ul {margin:10px 0!important;padding-left:18px!important}
+#installModal li {font-size:12px!important;line-height:1.5!important;margin:3px 0!important}
+#installModal #understandOpenApp {
+  display:block!important;
+  width:100%!important;
+  margin-top:14px!important;
+  padding:12px 16px!important;
+  border:0!important;
+  border-radius:10px!important;
+  background:#e50914!important;
+  color:#fff!important;
+  text-align:center!important;
+  font-weight:800!important;
+  font-size:14px!important;
+  text-decoration:none!important;
+  cursor:pointer!important;
+  box-sizing:border-box!important;
+}
+@media(max-width:600px){
+  #installModal .install-modal,
+  #installModal .modal-content,
+  #installModal > div {
+    width:calc(100% - 24px)!important;
+    padding:16px!important;
+    border-radius:15px!important;
+  }
+  #installModal h2{font-size:19px!important}
+  #installModal p{font-size:12px!important}
+}
+</style>
+
 </head>
 <body>
-<nav><div class="container nav"><a class="logo" href="#">Fin<span>Track</span></a><div class="links"><a href="#features">Features</a><a href="#webapp">Web App</a><a href="#download">Download</a><a href="#faq">FAQ</a></div><a class="btn red" href="#" class="btn red open-webapp">Open Web App →</a></div></nav>
+<nav><div class="container nav"><a class="logo" href="#">Fin<span>Track</span></a><div class="links"><a href="#features">Features</a><a href="#webapp">Web App</a><a href="#download">Download</a><a href="#faq">FAQ</a></div><a class="btn red open-webapp" href="https://mehedimadbor.github.io/FinTrack/">Open Web App →</a></div></nav>
 
 <header class="hero">
 <div class="container hero-grid">
@@ -130,11 +178,11 @@ footer{padding:32px 0;border-top:1px solid #222;color:#777;font-size:13px}.foot{
 <article class="feature"><div class="icon">🎨</div><h3>Personalization</h3><p>Choose themes, dark mode, accent colors and dashboard visibility preferences to fit your workflow.</p></article>
 </div></div></section>
 
-<section id="webapp"><div class="container"><div class="webapp"><div class="webgrid"><div><div class="kicker">YES — IT'S A WEB APP</div><h2>Use FinTrack directly from your browser.</h2><p>No traditional installation is required to use the core FinTrack web app. Open it on mobile, tablet or desktop and manage your money from your browser.</p><a class="btn red" href="#" class="btn red open-webapp">Open FinTrack Web App →</a></div><div class="points"><div class="point"><span class="check">✓</span><span>Works on modern mobile and desktop browsers.</span></div><div class="point"><span class="check">✓</span><span>Responsive, mobile-first interface.</span></div><div class="point"><span class="check">✓</span><span>Core data can be stored locally in the browser.</span></div><div class="point"><span class="check">✓</span><span>Backup and restore options available.</span></div><div class="point"><span class="check">✓</span><span>Cloud sync can be added as the project grows.</span></div></div></div></div></div></section>
+<section id="webapp"><div class="container"><div class="webapp"><div class="webgrid"><div><div class="kicker">YES — IT'S A WEB APP</div><h2>Use FinTrack directly from your browser.</h2><p>No traditional installation is required to use the core FinTrack web app. Open it on mobile, tablet or desktop and manage your money from your browser.</p><a class="btn red open-webapp" href="https://mehedimadbor.github.io/FinTrack/">Open FinTrack Web App →</a></div><div class="points"><div class="point"><span class="check">✓</span><span>Works on modern mobile and desktop browsers.</span></div><div class="point"><span class="check">✓</span><span>Responsive, mobile-first interface.</span></div><div class="point"><span class="check">✓</span><span>Core data can be stored locally in the browser.</span></div><div class="point"><span class="check">✓</span><span>Backup and restore options available.</span></div><div class="point"><span class="check">✓</span><span>Cloud sync can be added as the project grows.</span></div></div></div></div></div></section>
 
 <section><div class="container"><div class="center"><div class="kicker">WHAT'S INSIDE</div><h2 class="title">Built around real everyday money tasks.</h2></div><div class="columns"><div class="column"><h3>Money Management</h3><ul><li>Total balance overview</li><li>Income and expense tracking</li><li>Transaction search and history</li><li>Category-based spending</li><li>Monthly and weekly summaries</li><li>Notes on transactions</li><li>Recurring financial entries</li></ul></div><div class="column"><h3>Planning & Protection</h3><ul><li>Loans and repayments</li><li>Budgets and daily limits</li><li>Savings goals</li><li>Money requests</li><li>Financial reports</li><li>Reminders and alerts</li><li>Backup and privacy tools</li></ul></div></div></div></section>
 
-<section id="download" class="download"><div class="container"><div class="download-grid"><div><div class="kicker">APP ACCESS</div><h2>Use FinTrack on your phone or computer.</h2><p>FinTrack is currently delivered as a web app. You can use it from a browser and, when packaged as a PWA or native app, install it on supported devices.</p><a class="btn red" href="#" class="btn red open-webapp">Open Web App →</a></div><div class="platform"><strong>📱 App Download</strong><p>Android / iOS download options can be added here when official app packages are released.</p><a class="btn" href="#" class="btn open-webapp">Install / Open Web App</a><div class="store-note"><b>Google Play Store:</b> We currently do not have a Google Play Store developer account, so FinTrack is not available on Google Play at this time.</div></div></div></div></section>
+<section id="download" class="download"><div class="container"><div class="download-grid"><div><div class="kicker">APP ACCESS</div><h2>Use FinTrack on your phone or computer.</h2><p>FinTrack is currently delivered as a web app. You can use it from a browser and, when packaged as a PWA or native app, install it on supported devices.</p><a class="btn red open-webapp" href="https://mehedimadbor.github.io/FinTrack/">Open Web App →</a></div><div class="platform"><strong>📱 App Download</strong><p>Android / iOS download options can be added here when official app packages are released.</p><a class="btn open-webapp" href="https://mehedimadbor.github.io/FinTrack/">Install / Open Web App</a><div class="store-note"><b>Google Play Store:</b> We currently do not have a Google Play Store developer account, so FinTrack is not available on Google Play at this time.</div></div></div></div></section>
 
 <section id="faq"><div class="container"><div class="center"><div class="kicker">FAQ</div><h2 class="title">Frequently asked questions.</h2></div><div class="faq">
 <details open><summary>Is FinTrack a web app?</summary><p>Yes. FinTrack is a web application designed to work across modern mobile, tablet and desktop browsers.</p></details>
@@ -145,7 +193,7 @@ footer{padding:32px 0;border-top:1px solid #222;color:#777;font-size:13px}.foot{
 <details><summary>Will there be cloud backup?</summary><p>Cloud backup is planned as an extended capability. The website can present the feature now, while the production implementation should use a secure backend such as Firebase, Supabase or a custom API.</p></details>
 </div></div></section>
 
-<section><div class="container"><div class="cta"><h2>Start managing your money smarter.</h2><p>Track spending, plan savings, manage loans and keep your financial life organized with FinTrack.</p><a class="btn" href="#" class="btn red open-webapp">Open FinTrack Web App →</a></div></div></section>
+<section><div class="container"><div class="cta"><h2>Start managing your money smarter.</h2><p>Track spending, plan savings, manage loans and keep your financial life organized with FinTrack.</p><a class="btn red open-webapp" href="https://mehedimadbor.github.io/FinTrack/">Open FinTrack Web App →</a></div></div></section>
 
 
 <div class="install-modal" id="installModal" aria-hidden="true">
@@ -159,24 +207,96 @@ footer{padding:32px 0;border-top:1px solid #222;color:#777;font-size:13px}.foot{
       <div class="install-step"><div class="step-num">3</div><div><b>Desktop</b><span>If your browser supports installation, use the browser's <b>Install</b> or <b>Add to desktop</b> option.</span></div></div>
     </div>
     <div class="install-note"><b>Important:</b> No APK is available yet because FinTrack is currently a Web App. Native APK/app download will be announced in a future update.</div>
-    <div class="install-actions"><a class="btn red" href="https://mehedimadbor.github.io/FinTrack/" target="https://mehedimadbor.github.io/FinTrack/" rel="noopener">I Understand — Open Web App →</a><button class="btn" type="button" id="modalCancel">Cancel</button></div>
+    <div class="install-actions" style="margin-top:22px;">
+  
+</div>
   </div>
 </div>
 
-<footer><div class="container foot"><div><span class="logo">Fin<span>Track</span></span> © 2026</div><div>Personal Money Management Web App · <b>Play Store release coming later</b></div></div></footer>
+<footer><div class="container foot"><div><span class="logo">Fin<span>Track</span></span> © 2026</div><div>Personal Money Management Web App · <b>Play Store release coming later</b></div>
+<div id="installButtonWrap" style="display:block!important;margin-top:14px!important;">
+  <a id="understandOpenApp"
+     href="https://mehedimadbor.github.io/FinTrack/"
+     style="display:block!important;width:100%!important;background:#e50914!important;color:#fff!important;padding:12px 16px!important;border-radius:10px!important;text-align:center!important;font-weight:800!important;text-decoration:none!important;box-sizing:border-box!important;">
+     I Understand — Open Web App
+  </a>
+</div>
 
-<script>
-(function(){
-  const modal=document.getElementById('installModal');
-  const openers=document.querySelectorAll('.open-webapp');
-  const close=()=>{modal.classList.remove('show');modal.setAttribute('aria-hidden','true');};
-  openers.forEach(btn=>btn.addEventListener('click',e=>{e.preventDefault();modal.classList.add('show');modal.setAttribute('aria-hidden','false');}));
-  document.querySelector('.install-close').addEventListener('click',close);
-  document.getElementById('modalCancel').addEventListener('click',close);
-  modal.addEventListener('click',e=>{if(e.target===modal) close();});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape') close();});
-})();
-</script>
+</div></footer>
+
+
+
+
+<div id="installModal" aria-hidden="true" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.72);align-items:center;justify-content:center;padding:12px;box-sizing:border-box;">
+  <div style="position:relative;width:min(420px,100%);max-height:85vh;overflow:auto;background:#fff;color:#111;border-radius:18px;padding:20px;box-sizing:border-box;box-shadow:0 25px 70px rgba(0,0,0,.45);">
+    <button type="button" class="install-close" aria-label="Close" style="position:absolute;right:12px;top:10px;border:0;background:#f1f1f1;color:#333;width:32px;height:32px;border-radius:50%;font-size:20px;cursor:pointer;">×</button>
+    <div style="padding-right:38px;">
+      <div style="font-size:12px;color:#e50914;font-weight:800;letter-spacing:.08em;text-transform:uppercase;">FinTrack Web App</div>
+      <h2 style="margin:6px 0 8px;font-size:21px;">Install a shortcut</h2>
+      <p style="margin:0 0 12px;font-size:13px;line-height:1.5;color:#555;">FinTrack is a Web App. You can add a shortcut to your phone's home screen for quick access.</p>
+      <div style="background:#f7f7f7;border-radius:12px;padding:12px;font-size:12px;line-height:1.6;">
+        <b>Android Chrome</b><br>Tap ⋮ → <b>Add to Home screen</b> or <b>Install app</b> → Add.<br><br>
+        <b>iPhone Safari</b><br>Tap Share → <b>Add to Home Screen</b> → Add.
+      </div>
+      <p style="margin:12px 0 0;font-size:11px;line-height:1.5;color:#777;">There is no APK right now. FinTrack is currently available as a Web App. An APK/native app may be announced in a future update.</p>
+      <a id="understandOpenApp" href="https://mehedimadbor.github.io/FinTrack/" style="display:block!important;width:100%!important;margin-top:15px!important;padding:13px 16px!important;background:#e50914!important;color:#fff!important;border-radius:10px!important;text-align:center!important;font-size:14px!important;font-weight:800!important;text-decoration:none!important;box-sizing:border-box!important;cursor:pointer!important;">I Understand — Open Web App</a>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
+
+
+
+
+<script id="fintrack-install-modal-js">
+(function () {
+  var APP_URL = "https://mehedimadbor.github.io/FinTrack/";
+  function modal() { return document.getElementById("installModal"); }
+  function show() {
+    var m = modal(); if (!m) return;
+    m.style.display = "flex";
+    m.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+  function hide() {
+    var m = modal(); if (!m) return;
+    m.style.display = "none";
+    m.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+  document.addEventListener("click", function (e) {
+    var open = e.target.closest ? e.target.closest(".open-webapp") : null;
+    if (open) { e.preventDefault(); show(); return; }
+    if (e.target.id === "understandOpenApp") {
+      e.preventDefault();
+      window.location.href = APP_URL;
+      return;
+    }
+    if (e.target.closest && e.target.closest(".install-close")) { e.preventDefault(); hide(); }
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") hide(); });
+})();
+</script>
+<script id="fintrack-open-app">
+(function(){
+ const URL="https://mehedimadbor.github.io/FinTrack/";
+ document.addEventListener("click",function(e){
+   const open=e.target.closest(".open-webapp");
+   if(open){
+     e.preventDefault();
+     const m=document.getElementById("installModal");
+     if(m){m.style.display="flex";m.setAttribute("aria-hidden","false");document.body.style.overflow="hidden";}
+   }
+   if(e.target.closest(".install-close")){
+     const m=document.getElementById("installModal");
+     if(m){m.style.display="none";m.setAttribute("aria-hidden","true");document.body.style.overflow="";}
+   }
+   if(e.target.closest("#understandOpenApp")){
+     e.preventDefault();
+     window.location.href=URL;
+   }
+ });
+})();
+</script>
