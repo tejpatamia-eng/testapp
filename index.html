@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FinTrack — Personal Money Management Web App</title>
+<meta name="description" content="FinTrack is a modern personal money management web app for tracking income, expenses, loans, savings, budgets and money requests.">
+<style>
+:root{--bg:#070707;--surface:#101010;--surface2:#161616;--line:#292929;--white:#fff;--muted:#a2a2a2;--red:#e50914;--red2:#ff2630;--green:#47d693}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--white);line-height:1.6}
+a{text-decoration:none;color:inherit}.container{width:min(1180px,92%);margin:auto}
+nav{height:76px;position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(7,7,7,.84);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.07)}
+.nav{height:100%;display:flex;align-items:center;justify-content:space-between}.logo{font-size:25px;font-weight:900;letter-spacing:-1px}.logo span{color:var(--red)}
+.links{display:flex;gap:28px;color:#bbb;font-size:14px}.links a:hover{color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:9px;font-weight:800;border:1px solid #333;background:#171717;transition:.2s}.btn:hover{transform:translateY(-2px);border-color:#555}.btn.red{background:var(--red);border-color:var(--red)}.btn.red:hover{background:var(--red2)}
+.hero{padding:155px 0 100px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:650px;height:650px;right:-260px;top:-180px;background:rgba(229,9,20,.16);filter:blur(120px);border-radius:50%;pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:75px;align-items:center}.badge{display:inline-flex;gap:8px;border:1px solid #4a1719;background:#180b0c;color:#ff858a;padding:7px 12px;border-radius:99px;font-size:12px;font-weight:800;margin-bottom:22px}
+h1{font-size:clamp(48px,6.5vw,80px);line-height:1.01;letter-spacing:-4px;max-width:760px}h1 span{color:var(--red)}
+.hero-copy{font-size:18px;color:var(--muted);max-width:620px;margin:25px 0 30px}.actions{display:flex;gap:10px;flex-wrap:wrap}.subnote{font-size:12px;color:#777;margin-top:17px}
+
+.app-preview{display:flex;justify-content:center;align-items:center;min-height:590px;position:relative}
+.phone{width:330px;max-width:100%;padding:10px;border:1px solid #343434;border-radius:34px;background:#090909;box-shadow:0 35px 90px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.03);transform:rotate(1deg)}
+.phone-screen{overflow:hidden;border-radius:26px;background:#f7f7f7;color:#111;min-height:570px}
+.phone-notch{width:105px;height:22px;background:#090909;border-radius:0 0 16px 16px;margin:0 auto}
+.app-head{padding:13px 17px 8px;display:flex;align-items:center;gap:10px}
+.app-logo{width:36px;height:36px;border-radius:11px;background:#e50914;color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px}
+.app-name{font-weight:900;font-size:17px;color:#161616}.app-name span{color:#e50914}
+.app-user{margin:4px 12px 12px;padding:12px;border-radius:22px;background:#fff;box-shadow:0 8px 22px rgba(0,0,0,.08);display:flex;align-items:center;gap:10px}
+.avatar{width:45px;height:45px;border-radius:50%;background:#e50914;color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px;position:relative}
+.avatar:after{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:#29b96f;right:-1px;bottom:1px;border:2px solid #fff}
+.user-copy{flex:1;line-height:1.15}.user-copy small{color:#777;font-size:10px}.user-copy b{display:block;font-size:14px}.user-copy em{font-style:normal;color:#777;font-size:10px}
+.user-arrow{width:30px;height:30px;border-radius:50%;background:#f1f1f1;display:grid;place-items:center;color:#777}
+.balance-card{margin:0 12px 10px;padding:18px;border-radius:24px;background:linear-gradient(135deg,#e50914,#a60008);color:#fff;position:relative;overflow:hidden}
+.balance-card:after{content:"";position:absolute;width:150px;height:150px;border-radius:50%;right:-45px;top:-65px;background:rgba(255,255,255,.1);box-shadow:-55px 65px 0 rgba(255,255,255,.06)}
+.balance-card small{display:block;opacity:.85;font-size:11px}.balance-card strong{display:block;font-size:29px;letter-spacing:-1px;margin:3px 0}.balance-card span{font-size:10px;opacity:.8}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:0 12px 10px}
+.stat{background:#fff;border-radius:16px;padding:10px 8px;box-shadow:0 5px 15px rgba(0,0,0,.06)}.stat small{display:block;color:#777;font-size:9px}.stat b{display:block;font-size:12px;margin-top:2px}.income{color:#168b54}.expense{color:#d51b25}.saving{color:#8a5b00}
+.phone-nav{margin:0 12px 9px;padding:6px;background:#fff;border-radius:15px;display:flex;gap:4px;box-shadow:0 5px 15px rgba(0,0,0,.06)}
+.phone-nav span{flex:1;text-align:center;font-size:9px;color:#777;padding:7px 2px;border-radius:10px}.phone-nav span.active{background:#e50914;color:#fff;font-weight:800}
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;padding:0 12px 10px}
+.quick{background:#fff;border-radius:15px;padding:9px 4px;text-align:center;box-shadow:0 5px 15px rgba(0,0,0,.05);font-size:9px}.quick-icon{width:28px;height:28px;border-radius:9px;background:#fff0f1;color:#e50914;display:grid;place-items:center;margin:0 auto 4px;font-weight:900;font-size:14px}.quick:nth-child(2) .quick-icon{background:#e8f8ef;color:#168b54}.quick:nth-child(3) .quick-icon{background:#fff5df;color:#b87900}.quick:nth-child(4) .quick-icon{background:#eeeaff;color:#5c4bc4}
+.summary{margin:0 12px;padding:13px;border-radius:18px;background:#fff;box-shadow:0 5px 15px rgba(0,0,0,.05)}.summary h4{font-size:12px;margin-bottom:8px}.summary-row{display:flex;justify-content:space-between;font-size:10px;padding:5px 0;border-bottom:1px solid #eee}.summary-row:last-child{border-bottom:0}.summary-row b{font-size:10px}
+.bottom-nav{margin:10px 12px 12px;background:#fff;border-radius:18px;display:grid;grid-template-columns:repeat(5,1fr);padding:7px 4px;box-shadow:0 5px 18px rgba(0,0,0,.08);align-items:center}.bottom-nav span{text-align:center;font-size:8px;color:#777}.bottom-nav .plus{width:43px;height:43px;border-radius:50%;background:#e50914;color:#fff;display:grid;place-items:center;font-size:24px;margin:-18px auto 0;border:4px solid #f7f7f7;box-shadow:0 7px 18px rgba(229,9,20,.3)}.preview-label{position:absolute;bottom:15px;left:50%;transform:translateX(-50%);font-size:10px;color:#666;white-space:nowrap}
+@media(max-width:900px){.app-preview{min-height:520px}.phone{width:310px}.phone-screen{min-height:540px}}
+
+.mockup{border:1px solid #303030;background:linear-gradient(145deg,#181818,#0c0c0c);border-radius:22px;padding:12px;box-shadow:0 30px 100px #000;transform:rotate(1deg)}.browser{border:1px solid #292929;border-radius:15px;overflow:hidden;background:#0c0c0c}.browserbar{height:37px;background:#151515;display:flex;align-items:center;padding:0 12px;gap:6px}.browserbar i{width:8px;height:8px;border-radius:50%;background:#444}.screen{padding:17px}.screen-top{display:flex;justify-content:space-between;color:#aaa;font-size:11px;margin-bottom:12px}.screen-balance{background:var(--red);border-radius:13px;padding:18px}.screen-balance small{opacity:.75}.screen-balance b{display:block;font-size:28px}.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:9px}.mini{background:#151515;border:1px solid #282828;border-radius:10px;padding:12px}.mini small{color:#777}.mini b{display:block;font-size:17px}.green{color:var(--green)}.mini-list{margin-top:9px;background:#151515;border:1px solid #282828;border-radius:10px;padding:10px}.mini-row{display:flex;justify-content:space-between;padding:8px 2px;border-bottom:1px solid #252525;font-size:11px}.mini-row:last-child{border:0}
+section{padding:95px 0}.center{text-align:center}.kicker{color:#ff666d;font-size:12px;font-weight:900;letter-spacing:1.5px}.title{font-size:43px;letter-spacing:-2px;margin-top:9px}.desc{color:var(--muted);max-width:690px;margin:12px auto 0}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:45px}.feature{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:25px}.feature:hover{border-color:#4a2426}.icon{width:42px;height:42px;border-radius:11px;background:#241012;color:#ff6269;display:grid;place-items:center;font-weight:900;margin-bottom:17px}.feature h3{font-size:17px;margin-bottom:7px}.feature p{font-size:13px;color:#969696}
+.webapp{background:linear-gradient(145deg,#160a0b,#0d0d0d);border:1px solid #3c1719;border-radius:24px;padding:65px}.webgrid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}.webapp h2{font-size:45px;line-height:1.08;letter-spacing:-2px}.webapp p{color:#aaa;margin:15px 0 22px}.points{display:grid;gap:12px}.point{display:flex;gap:10px;color:#ccc}.check{color:#ff5b62;font-weight:900}
+.columns{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:45px}.column{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:27px}.column h3{margin-bottom:16px}.column li{list-style:none;padding:8px 0;border-bottom:1px solid #222;color:#aaa}.column li:before{content:"✓";color:#ff5b62;margin-right:9px;font-weight:900}
+.download{border-top:1px solid #222;border-bottom:1px solid #222;background:#0c0c0c}.download-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}.download h2{font-size:43px;letter-spacing:-2px}.download p{color:#aaa;margin:14px 0 20px}.platform{border:1px solid #303030;background:#151515;border-radius:16px;padding:23px}.platform strong{font-size:18px}.platform p{font-size:13px;margin:6px 0 15px}.store-note{border:1px solid #4b2527;background:#1b0d0e;padding:13px;border-radius:10px;color:#ddd;font-size:13px;margin-top:13px}.store-note b{color:#ff7076}
+.faq{max-width:850px;margin:40px auto 0}.faq details{border-bottom:1px solid #292929;padding:17px 0}.faq summary{cursor:pointer;font-weight:700}.faq p{color:#999;margin-top:9px;font-size:14px}
+.cta{background:var(--red);border-radius:22px;padding:60px;text-align:center}.cta h2{font-size:43px;letter-spacing:-2px}.cta p{max-width:600px;margin:10px auto 23px;color:#ffe5e6}.cta .btn{background:#fff;color:#111;border-color:#fff}
+footer{padding:32px 0;border-top:1px solid #222;color:#777;font-size:13px}.foot{display:flex;justify-content:space-between;gap:20px}.foot b{color:#fff}
+@media(max-width:850px){.links{display:none}.hero-grid,.webgrid,.download-grid,.columns{grid-template-columns:1fr}.features{grid-template-columns:1fr 1fr}.hero{padding-top:125px}.mockup{transform:none}.webapp{padding:35px}.title,.download h2,.webapp h2,.cta h2{font-size:34px}}
+@media(max-width:560px){.features{grid-template-columns:1fr}.hero-actions .btn{width:100%}.hero h1{letter-spacing:-2.5px}.cta{padding:38px 22px}}
+
+.install-modal{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:20px;z-index:9999}.install-modal.show{display:flex}.install-box{width:min(520px,100%);background:#fff;color:#171717;border-radius:24px;padding:28px;box-shadow:0 30px 90px rgba(0,0,0,.45);position:relative}.install-box h3{font-size:25px;margin:0 0 8px}.install-box>p{color:#666;line-height:1.6;margin:0 0 18px}.install-steps{display:grid;gap:10px;margin:0 0 18px}.install-step{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid #eee;border-radius:14px;background:#fafafa}.step-num{width:27px;height:27px;flex:0 0 27px;border-radius:50%;background:#e50914;color:#fff;display:grid;place-items:center;font-weight:800;font-size:12px}.install-step b{display:block;font-size:13px;margin-bottom:2px}.install-step span{display:block;color:#666;font-size:11px;line-height:1.45}.install-note{font-size:11px;line-height:1.55;color:#666;background:#fff5f5;border-left:3px solid #e50914;padding:10px 12px;border-radius:8px;margin-bottom:18px}.install-actions{display:flex;gap:10px;flex-wrap:wrap}.install-close{position:absolute;right:15px;top:12px;border:0;background:#f2f2f2;width:32px;height:32px;border-radius:50%;font-size:20px;cursor:pointer}.install-actions .btn{border:0;cursor:pointer}.
+</style>
+</head>
+<body>
+<nav><div class="container nav"><a class="logo" href="#">Fin<span>Track</span></a><div class="links"><a href="#features">Features</a><a href="#webapp">Web App</a><a href="#download">Download</a><a href="#faq">FAQ</a></div><a class="btn red" href="#" class="btn red open-webapp">Open Web App →</a></div></nav>
+
+<header class="hero">
+<div class="container hero-grid">
+<div>
+<div class="badge">● PERSONAL MONEY MANAGEMENT WEB APP</div>
+<h1>Take control of your <span>money.</span></h1>
+<p class="hero-copy">FinTrack helps you manage daily money, track income and expenses, monitor loans, plan savings, create money requests and understand your finances from one simple place.</p>
+<div class="actions"><a class="btn red" href="#webapp">Explore FinTrack →</a><a class="btn" href="#download">Download Options ↓</a></div>
+<div class="subnote">Plan your money. Track your spending. Build better financial habits.</div>
+</div>
+<div class="app-preview">
+  <div class="phone">
+    <div class="phone-screen">
+      <div class="phone-notch"></div>
+      <div class="app-head">
+        <div class="app-logo">F</div>
+        <div class="app-name">Fin<span>Track</span></div>
+      </div>
+      <div class="app-user">
+        <div class="avatar">U</div>
+        <div class="user-copy"><small>শুভ বিকেল</small><b>আপনার FinTrack</b><em>আজকের আর্থিক অবস্থা</em></div>
+        <div class="user-arrow">›</div>
+      </div>
+      <div class="balance-card">
+        <small>মোট ব্যালেন্স</small>
+        <strong>৳ 1,25,850</strong>
+        <span>এই মাসে আয়: ৳ 65,000</span>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><small>আয়</small><b class="income">৳ 65,000</b></div>
+        <div class="stat"><small>খরচ</small><b class="expense">৳ 28,450</b></div>
+        <div class="stat"><small>সঞ্চয়</small><b class="saving">৳ 36,550</b></div>
+      </div>
+      <div class="phone-nav"><span class="active">ড্যাশবোর্ড</span><span>যোগ করুন</span><span>অ্যাকাউন্ট</span><span>লোন</span><span>হিসাব</span></div>
+      <div class="quick-grid">
+        <div class="quick"><div class="quick-icon">↗</div>খরচ</div>
+        <div class="quick"><div class="quick-icon">↙</div>জমা</div>
+        <div class="quick"><div class="quick-icon">↥</div>লোন</div>
+        <div class="quick"><div class="quick-icon">♜</div>সঞ্চয়</div>
+      </div>
+      <div class="summary">
+        <h4>এই মাসের সারসংক্ষেপ</h4>
+        <div class="summary-row"><span>Food</span><b class="expense">− ৳ 8,450</b></div>
+        <div class="summary-row"><span>Salary</span><b class="income">+ ৳ 50,000</b></div>
+        <div class="summary-row"><span>Transport</span><b class="expense">− ৳ 3,200</b></div>
+      </div>
+      <div class="bottom-nav"><span>⌂<br>হোম</span><span>◯<br>AI চ্যাট</span><span class="plus">+</span><span>▤<br>লেনদেন</span><span>⚙<br>সেটিংস</span></div>
+    </div>
+  </div>
+  <div class="preview-label">Live-style FinTrack dashboard preview</div>
+</div></div></div></header>
+
+<section id="features"><div class="container"><div class="center"><div class="kicker">POWERFUL FEATURES</div><h2 class="title">Everything you need to manage your money.</h2><p class="desc">FinTrack brings everyday money management tools together in a clean, simple and privacy-focused web experience.</p></div>
+<div class="features">
+<article class="feature"><div class="icon">▦</div><h3>Financial Dashboard</h3><p>Total balance, income, expenses, loans, savings, daily summary, monthly summary, weekly comparison and recent transactions.</p></article>
+<article class="feature"><div class="icon">↔</div><h3>Income & Expense Management</h3><p>Add deposits and expenses, categorize them, add notes, search history, edit entries and remove transactions.</p></article>
+<article class="feature"><div class="icon">◈</div><h3>Loan Management</h3><p>Track money you lent or owe, repayments, due dates, reminders, overdue amounts and loan status.</p></article>
+<article class="feature"><div class="icon">🎯</div><h3>Budget & Savings</h3><p>Monthly budgets, category spending, daily limits, savings goals, savings planner and progress tracking.</p></article>
+<article class="feature"><div class="icon">↻</div><h3>Recurring Transactions</h3><p>Set recurring salary, rent, bills and other regular income or expenses with selected dates.</p></article>
+<article class="feature"><div class="icon">✦</div><h3>AI Finance Assistant</h3><p>Ask about your balance, spending, loans and transaction history using simple natural-language commands.</p></article>
+<article class="feature"><div class="icon">▤</div><h3>Financial Reports</h3><p>View income, expenses, loans, repayments, savings, net income, averages, top expenses and category reports.</p></article>
+<article class="feature"><div class="icon">⇄</div><h3>Money Requests</h3><p>Create money requests, record who owes what, add a message, set a due date and track request status.</p></article>
+<article class="feature"><div class="icon">🔔</div><h3>Reminders</h3><p>Create reminders for loans, bills, payments, financial tasks and other important dates.</p></article>
+<article class="feature"><div class="icon">🔐</div><h3>Security & Privacy</h3><p>App lock, PIN protection, biometric support when available, automatic lock, hidden balances and backup reminders.</p></article>
+<article class="feature"><div class="icon">🌐</div><h3>বাংলা & English</h3><p>Designed to support Bangla and English, Bengali digits, large-number formatting and Lakh/Crore display.</p></article>
+<article class="feature"><div class="icon">🎨</div><h3>Personalization</h3><p>Choose themes, dark mode, accent colors and dashboard visibility preferences to fit your workflow.</p></article>
+</div></div></section>
+
+<section id="webapp"><div class="container"><div class="webapp"><div class="webgrid"><div><div class="kicker">YES — IT'S A WEB APP</div><h2>Use FinTrack directly from your browser.</h2><p>No traditional installation is required to use the core FinTrack web app. Open it on mobile, tablet or desktop and manage your money from your browser.</p><a class="btn red" href="#" class="btn red open-webapp">Open FinTrack Web App →</a></div><div class="points"><div class="point"><span class="check">✓</span><span>Works on modern mobile and desktop browsers.</span></div><div class="point"><span class="check">✓</span><span>Responsive, mobile-first interface.</span></div><div class="point"><span class="check">✓</span><span>Core data can be stored locally in the browser.</span></div><div class="point"><span class="check">✓</span><span>Backup and restore options available.</span></div><div class="point"><span class="check">✓</span><span>Cloud sync can be added as the project grows.</span></div></div></div></div></div></section>
+
+<section><div class="container"><div class="center"><div class="kicker">WHAT'S INSIDE</div><h2 class="title">Built around real everyday money tasks.</h2></div><div class="columns"><div class="column"><h3>Money Management</h3><ul><li>Total balance overview</li><li>Income and expense tracking</li><li>Transaction search and history</li><li>Category-based spending</li><li>Monthly and weekly summaries</li><li>Notes on transactions</li><li>Recurring financial entries</li></ul></div><div class="column"><h3>Planning & Protection</h3><ul><li>Loans and repayments</li><li>Budgets and daily limits</li><li>Savings goals</li><li>Money requests</li><li>Financial reports</li><li>Reminders and alerts</li><li>Backup and privacy tools</li></ul></div></div></div></section>
+
+<section id="download" class="download"><div class="container"><div class="download-grid"><div><div class="kicker">APP ACCESS</div><h2>Use FinTrack on your phone or computer.</h2><p>FinTrack is currently delivered as a web app. You can use it from a browser and, when packaged as a PWA or native app, install it on supported devices.</p><a class="btn red" href="#" class="btn red open-webapp">Open Web App →</a></div><div class="platform"><strong>📱 App Download</strong><p>Android / iOS download options can be added here when official app packages are released.</p><a class="btn" href="#" class="btn open-webapp">Install / Open Web App</a><div class="store-note"><b>Google Play Store:</b> We currently do not have a Google Play Store developer account, so FinTrack is not available on Google Play at this time.</div></div></div></div></section>
+
+<section id="faq"><div class="container"><div class="center"><div class="kicker">FAQ</div><h2 class="title">Frequently asked questions.</h2></div><div class="faq">
+<details open><summary>Is FinTrack a web app?</summary><p>Yes. FinTrack is a web application designed to work across modern mobile, tablet and desktop browsers.</p></details>
+<details><summary>Is FinTrack available on Google Play?</summary><p>Not currently. We do not have a Google Play Store developer account at this time, so there is no official Google Play listing yet.</p></details>
+<details><summary>Can I download the app?</summary><p>The website includes an app download area for future official releases. Until an official package is published, the recommended option is to use the web app.</p></details>
+<details><summary>Where is my financial data stored?</summary><p>The core standalone version can use browser-based local storage. Cloud backup and multi-device synchronization require a properly secured cloud backend.</p></details>
+<details><summary>Does FinTrack support money requests?</summary><p>Yes. The product includes a Money Request feature for creating and tracking requests with people, amounts, messages, due dates and statuses.</p></details>
+<details><summary>Will there be cloud backup?</summary><p>Cloud backup is planned as an extended capability. The website can present the feature now, while the production implementation should use a secure backend such as Firebase, Supabase or a custom API.</p></details>
+</div></div></section>
+
+<section><div class="container"><div class="cta"><h2>Start managing your money smarter.</h2><p>Track spending, plan savings, manage loans and keep your financial life organized with FinTrack.</p><a class="btn" href="#" class="btn red open-webapp">Open FinTrack Web App →</a></div></div></section>
+
+
+<div class="install-modal" id="installModal" aria-hidden="true">
+  <div class="install-box" role="dialog" aria-modal="true" aria-labelledby="installTitle">
+    <button class="install-close" type="button" aria-label="Close">×</button>
+    <h3 id="installTitle">Open FinTrack Web App</h3>
+    <p>FinTrack is a <b>Web App</b> — APK is not available right now. You can still add it to your phone's home screen as a shortcut.</p>
+    <div class="install-steps">
+      <div class="install-step"><div class="step-num">1</div><div><b>Android — Chrome</b><span>After opening FinTrack, tap <b>⋮ Menu</b> → <b>Add to Home screen</b> or <b>Install app</b> → confirm <b>Add / Install</b>.</span></div></div>
+      <div class="install-step"><div class="step-num">2</div><div><b>iPhone — Safari</b><span>Open FinTrack in Safari → tap <b>Share</b> → <b>Add to Home Screen</b> → tap <b>Add</b>.</span></div></div>
+      <div class="install-step"><div class="step-num">3</div><div><b>Desktop</b><span>If your browser supports installation, use the browser's <b>Install</b> or <b>Add to desktop</b> option.</span></div></div>
+    </div>
+    <div class="install-note"><b>Important:</b> No APK is available yet because FinTrack is currently a Web App. Native APK/app download will be announced in a future update.</div>
+    <div class="install-actions"><a class="btn red" href="https://mehedimadbor.github.io/FinTrack/" target="_blank" rel="noopener">I Understand — Open Web App →</a><button class="btn" type="button" id="modalCancel">Cancel</button></div>
+  </div>
+</div>
+
+<footer><div class="container foot"><div><span class="logo">Fin<span>Track</span></span> © 2026</div><div>Personal Money Management Web App · <b>Play Store release coming later</b></div></div></footer>
+
+<script>
+(function(){
+  const modal=document.getElementById('installModal');
+  const openers=document.querySelectorAll('.open-webapp');
+  const close=()=>{modal.classList.remove('show');modal.setAttribute('aria-hidden','true');};
+  openers.forEach(btn=>btn.addEventListener('click',e=>{e.preventDefault();modal.classList.add('show');modal.setAttribute('aria-hidden','false');}));
+  document.querySelector('.install-close').addEventListener('click',close);
+  document.getElementById('modalCancel').addEventListener('click',close);
+  modal.addEventListener('click',e=>{if(e.target===modal) close();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape') close();});
+})();
+</script>
+
+</body>
+</html>
